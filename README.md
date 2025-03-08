@@ -61,11 +61,11 @@ This Flutter project was developed as part of a technical assessment for a Flutt
 ## 🚀 Kurulum & Çalıştırma / Installation & Setup
 1. **Depoyu Klonlayın / Clone the Repository:**
    ```sh
-   git clone https://github.com/ozdemiroguz/flutter_test_case.git
+   git clone https://github.com/ozdemiroguz/test_case.git
    ```
 2. **Proje Klasörüne Girin / Navigate to the Project Folder:**
    ```sh
-   cd flutter_test_case
+   cd test_case
    ```
 3. **Bağımlılıkları Yükleyin / Install Dependencies:**
    ```sh
@@ -84,4 +84,4 @@ Bu proje açık kaynaklıdır ve özgürce değiştirilebilir. / This project is
 ---
 
 ## 📧 İletişim / Contact
-Herhangi bir sorunuz için [GitHub Issues](https://github.com/ozdemiroguz/flutter_test_case/issues) üzerinden ulaşabilirsiniz. / For any questions, feel free to reach out via [GitHub Issues](https://github.com/ozdemiroguz/flutter_test_case/issues).
+Herhangi bir sorunuz için [GitHub Issues](https://github.com/ozdemiroguz/test_case/issues) üzerinden ulaşabilirsiniz. / For any questions, feel free to reach out via [GitHub Issues](https://github.com/ozdemiroguz/test_case/issues).
