@@ -1,7 +1,6 @@
 // repositories/movies_repository_impl.dart
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
-import 'package:test_case/core/injections/locator.dart';
 import 'package:test_case/services/network/network_service.dart';
 import 'package:test_case/core/models/failure/failure.dart';
 

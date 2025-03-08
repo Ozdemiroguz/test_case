@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -159,7 +158,6 @@ class _PasswordInput extends ConsumerWidget {
 class _LoginButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formKey = ref.watch(_keyProvider);
     return CustomFilledButton(
       onPressed: () async {
         final formState = ref.read(_keyProvider).currentState;

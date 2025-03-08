@@ -62,9 +62,9 @@ class IntroPage extends StatelessWidget {
                     height: 60.r,
                     child: TextButton(
                       style: TextButtonTheme.of(context).style?.copyWith(
-                        overlayColor: MaterialStateProperty.resolveWith<Color>(
+                        overlayColor: WidgetStateProperty.resolveWith<Color>(
                           (states) {
-                            if (states.contains(MaterialState.hovered)) {
+                            if (states.contains(WidgetState.hovered)) {
                               return Colors.transparent;
                             }
                             return Colors.transparent;

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:test_case/constants/colors.dart';
 import 'package:test_case/constants/font_sizes.dart';
 import 'package:test_case/constants/text_styles.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/system_ui_overlay_styles.dart';
-import '../gen/assets.gen.dart';
 
 final theme = ThemeData(
   colorScheme: _colorScheme,

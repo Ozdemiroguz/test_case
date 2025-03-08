@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:test_case/constants/colors.dart';
 import 'package:test_case/gen/assets.gen.dart';
 
 class SocialMediaSign extends ConsumerWidget {

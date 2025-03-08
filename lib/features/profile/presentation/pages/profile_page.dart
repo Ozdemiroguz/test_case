@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_case/custom/custom_app_bar.dart';
-import 'package:test_case/features/profile/presentation/pages/detailed_profile_page.dart';
 import 'package:test_case/features/profile/presentation/providers/profile_provider.dart';
 import 'package:test_case/features/profile/presentation/widgets/profile_header.dart';
 
 import '../../../../router/router.dart';
-import '../providers/profile_image_update_provider.dart';
 
 @RoutePage()
 class ProfilePage extends ConsumerWidget {
