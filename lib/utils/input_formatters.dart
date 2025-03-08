@@ -76,11 +76,3 @@ List<TextInputFormatter> tcNoInputFormatters() {
     // FilteringTextInputFormatter.deny(RegExp(r"\s "), replacementString: " "),
   ];
 }
-
-// CurrencyTextInputFormatter getAmountTextInputFormatter({bool useFractionalDigits = true}) => CurrencyTextInputFormatter(
-//       name: "",
-//       customPattern: "###.###,##",
-//       locale: "tr_TR",
-//       enableNegative: false,
-//       decimalDigits: 2,
-//     );

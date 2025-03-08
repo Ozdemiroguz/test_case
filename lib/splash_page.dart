@@ -9,7 +9,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'bootstrap.dart';
 import 'constants/colors.dart';
 import 'gen/assets.gen.dart';
 
@@ -35,10 +34,12 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         FlutterNativeSplash.remove();
 
         Future.delayed(const Duration(seconds: 3), () async {
-          context.router.pushAndPopUntil(
-            const LoginRoute(),
-            predicate: (route) => false,
-          );
+          final isTokenExpired = await ref.read(_isTokenExpiredProvider.future);
+          if (isTokenExpired) {
+            context.router.replace(const LoginRoute());
+          } else {
+            context.router.replace(const HomeNavBarRoute());
+          }
         });
 
         return null;
@@ -57,10 +58,13 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 240.r,
-                height: 240.r,
-                child: Assets.icons.hide.svg(width: 240.r, height: 240.r),
+              Container(
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    shape: BoxShape.circle),
+                width: 120.r,
+                height: 120.r,
+                child: Assets.images.logo.image(width: 60.r, height: 60.r),
               ),
             ],
           ),

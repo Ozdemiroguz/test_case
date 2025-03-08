@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
 
 final class CustomFilledButton extends StatelessWidget {
+  final bool enabled;
   final void Function()? onPressed;
   final ButtonStyle? style;
 
@@ -16,6 +19,7 @@ final class CustomFilledButton extends StatelessWidget {
   final WidgetStatesController? statesController;
 
   const CustomFilledButton({
+    this.enabled = true,
     required this.onPressed,
     required this.child,
     this.onLongPress,
@@ -31,11 +35,11 @@ final class CustomFilledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      onPressed: onPressed,
+      onPressed: enabled ? onPressed : null,
       style: style,
-      onLongPress: onLongPress,
-      onHover: onHover,
-      onFocusChange: onFocusChange,
+      onLongPress: enabled ? onLongPress : null,
+      onHover: enabled ? onHover : null,
+      onFocusChange: enabled ? onFocusChange : null,
       focusNode: focusNode,
       autofocus: autofocus,
       clipBehavior: clipBehavior,

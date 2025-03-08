@@ -21,13 +21,18 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 import '../../features/auth/data/repositories/auth_repository_impl.dart'
     as _i153;
 import '../../features/auth/domain/repositories/auth_repository.dart' as _i787;
+import '../../features/home/data/repositories/movie_repository.dart' as _i464;
+import '../../features/home/domain/repositories/movie_repository.dart'
+    as _i1023;
+import '../../features/profile/data/repositories/profile_repository_impl.dart'
+    as _i334;
+import '../../features/profile/domain/repositories/profile_repository.dart'
+    as _i894;
 import '../../router/router.dart' as _i295;
 import '../../services/jwt/jwt_service.dart' as _i769;
 import '../../services/jwt/jwt_service_impl.dart' as _i47;
 import '../../services/locale/locale_resources_service.dart' as _i354;
 import '../../services/locale/locale_resources_service_impl.dart' as _i94;
-import '../../services/location/location_service.dart' as _i876;
-import '../../services/location/location_service_impl.dart' as _i679;
 import '../../services/network/network_info.dart' as _i538;
 import '../../services/network/network_info_impl.dart' as _i184;
 import '../../services/network/network_service.dart' as _i298;
@@ -66,8 +71,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => const _i112.Base64Encode());
     gh.lazySingleton<_i538.NetworkInfo>(
         () => _i184.NetworkInfoImpl(connectivity: gh<_i318.Connectivity>()));
-    gh.lazySingleton<_i876.LocationService>(
-        () => const _i679.LocationServiceImpl());
     gh.lazySingleton<_i769.JwtService>(() => _i47.JwtServiceImpl());
     gh.lazySingleton<_i298.NetworkService>(() => _i669.NetworkServiceImpl(
           gh<_i361.Dio>(),
@@ -78,6 +81,10 @@ extension GetItInjectableX on _i174.GetIt {
           networkService: gh<_i298.NetworkService>(),
           localeResourcesService: gh<_i354.LocaleResourcesService>(),
         ));
+    gh.lazySingleton<_i1023.MoviesRepository>(
+        () => _i464.MoviesRepositoryImpl(gh<_i298.NetworkService>()));
+    gh.lazySingleton<_i894.ProfileRepository>(
+        () => _i334.ProfileRepositoryImpl(gh<_i298.NetworkService>()));
     return this;
   }
 }

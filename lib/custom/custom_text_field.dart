@@ -92,8 +92,8 @@ class CustomTextField extends HookWidget {
 
     return TextFormField(
       selectionControls: MaterialTextSelectionControls(),
-      cursorColor: AppColors.white,
-      cursorErrorColor: AppColors.white,
+      cursorColor: Theme.of(context).colorScheme.onPrimary,
+      cursorErrorColor: Theme.of(context).colorScheme.error,
       key: formFieldKey,
       initialValue: initialValue,
       style: Theme.of(context).textTheme.labelMedium,

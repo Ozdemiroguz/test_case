@@ -1,12 +1,16 @@
-import 'package:test_case/core/models/failure/failure.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:test_case/core/models/failure/failure.dart';
 
 abstract interface class AuthRepository {
   Future<bool> isTokenExpired();
-  Future<Either<Failure, Unit>> login(String email, String password);
-  Future<Either<Failure, Unit>> register(
-    String name,
-    String email,
-    String password,
-  );
+  Future<Option<Failure>> login({
+    required String email,
+    required String password,
+  });
+  Future<Option<Failure>> signUp({
+    required String email,
+    required String password,
+    required String name,
+  });
+  Future<Option<Failure>> logout();
 }

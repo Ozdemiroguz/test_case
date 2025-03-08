@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
+import 'package:test_case/core/injections/locator.dart';
+import 'package:test_case/router/router.dart';
 
 import '../../constants/failure_message.dart';
 import '../../core/models/failure/failure.dart';
@@ -102,21 +104,26 @@ final class NetworkServiceImpl implements NetworkService {
       if (await networkInfo.isConnected) {
         final result = await operation();
 
-        // if (result.data?["status"] == 401) {
-        //   localeResourcesService.clearSecureStorage();
-        //   clearToken();
+        print("Response services: ${result.data}");
 
-        //   getIt<AppRouter>().replaceAll([const LoginRoute()]);
+        final code = result.data?['response']['code'];
 
-        //   return left(Failure.responseError(result.data?["message"] as String? ?? unknownErrorMessage));
-        // }
+        if (code == 401) {
+          localeResourcesService.clearSecureStorage();
+          clearToken();
 
-        /*if (result.data?["status"] != 200) {
-          log(result.requestOptions.data.toString());
-          log(result.data.toString());
+          getIt<AppRouter>().replaceAll([const LoginRoute()]);
 
-          return left(Failure.responseError(result.data?["message"] as String? ?? unknownErrorMessage));
-        }*/
+          return left(Failure.responseError(
+              result.data?['response']['message'] as String? ??
+                  unknownErrorMessage));
+        }
+
+        if ((code != 200 && code != 201)) {
+          return left(Failure.responseError(
+              result.data?['response']['message'] as String? ??
+                  unknownErrorMessage));
+        }
 
         return right(result);
       } else {
@@ -128,12 +135,12 @@ final class NetworkServiceImpl implements NetworkService {
           Failure.connectionTimedOut(connectionTimedOutMessage),
         );
       } else {
+        print("Error: ${e.message}");
+        final errorData = e.response?.data as Map<String, dynamic>?;
+        final apiMessage = errorData?["response"]?["message"]?.toString();
         return left(
           Failure.responseError(
-            (e.response?.data as Map<String, dynamic>?)?["message"]
-                    .toString() ??
-                e.message ??
-                e.error.toString(),
+            apiMessage ?? e.message ?? e.error.toString(),
           ),
         );
       }

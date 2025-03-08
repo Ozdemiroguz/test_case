@@ -1,7 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fpdart/fpdart.dart' hide Order;
 import 'package:injectable/injectable.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'locale_resources_service.dart';
@@ -18,19 +17,6 @@ final class LocaleResourcesServiceImpl implements LocaleResourcesService {
   });
 
   @override
-  Future<Option<String>> getRefreshToken() async {
-    final token = await secureStorage.read(key: _Keys.refreshToken);
-
-    return optionOf(token);
-  }
-
-  @override
-  Future<void> setRefreshToken(String token) => secureStorage.write(key: _Keys.refreshToken, value: token);
-
-  @override
-  Future<void> deleteRefreshToken() => secureStorage.delete(key: _Keys.refreshToken);
-
-  @override
   Future<Option<String>> getAccessToken() async {
     final token = await secureStorage.read(key: _Keys.accessToken);
 
@@ -38,47 +24,36 @@ final class LocaleResourcesServiceImpl implements LocaleResourcesService {
   }
 
   @override
-  Future<void> setAccessToken(String token) => secureStorage.write(key: _Keys.accessToken, value: token);
+  Future<void> setAccessToken(String token) =>
+      secureStorage.write(key: _Keys.accessToken, value: token);
 
   @override
-  Future<void> deleteAccessToken() => secureStorage.delete(key: _Keys.accessToken);
+  Future<void> deleteAccessToken() =>
+      secureStorage.delete(key: _Keys.accessToken);
 
   @override
-  Future<void> setEmail(String email) => secureStorage.write(key: _Keys.email, value: email);
+  Future<void> setUserId(String userId) =>
+      secureStorage.write(key: _Keys.userId, value: userId);
 
   @override
-  Future<Option<String>> getEmail() async {
-    final email = await secureStorage.read(key: _Keys.email);
+  Future<Option<String>> getUserId() async {
+    final userId = await secureStorage.read(key: _Keys.userId);
 
-    return optionOf(email);
+    return optionOf(userId);
   }
 
   @override
-  Future<void> deleteEmail() => secureStorage.delete(key: _Keys.email);
+  Future<void> deleteUserId() => secureStorage.delete(key: _Keys.userId);
 
   @override
   bool getRememberMe() => sharedPreferences.getBool(_Keys.rememberMe) ?? false;
 
   @override
-  Future<void> setRememberMe(bool value) => sharedPreferences.setBool(_Keys.rememberMe, value);
+  Future<void> setRememberMe(bool value) =>
+      sharedPreferences.setBool(_Keys.rememberMe, value);
 
   @override
   Future<void> clearSecureStorage() => secureStorage.deleteAll();
-
-  @override
-  Future<Option<String>> getEmployeeId() async {
-    final token = await getAccessToken();
-
-    return token.fold(
-      none,
-      (t) {
-        final decodedToken = JwtDecoder.decode(t);
-
-        // ignore: avoid_dynamic_calls
-        return some(decodedToken["https://hasura.io/jwt/claims"]["x-hasura-employee-id"] as String);
-      },
-    );
-  }
 
   @override
   Future<void> deleteAll() async {
@@ -88,8 +63,7 @@ final class LocaleResourcesServiceImpl implements LocaleResourcesService {
 }
 
 abstract final class _Keys {
-  static const String refreshToken = "refreshToken";
   static const String accessToken = "accessToken";
-  static const String email = "email";
+  static const String userId = "userId";
   static const String rememberMe = "rememberMe";
 }

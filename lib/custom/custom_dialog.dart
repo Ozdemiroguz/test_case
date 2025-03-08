@@ -79,7 +79,7 @@ abstract final class CustomDialog extends StatelessWidget {
     return showDialog<T>(
       context: context,
       barrierDismissible: false,
-      barrierColor: AppColors.background..withAlpha(200),
+      barrierColor: Theme.of(context).colorScheme.onPrimary.withAlpha(125),
       builder: (context) => this,
     );
   }
@@ -256,12 +256,21 @@ class _Icon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (type) {
-      _Type.failure => BackgroundedIcon(
-          backgroundColor: AppColors.error, icon: Assets.icons.failure),
-      _Type.success => BackgroundedIcon(
-          backgroundColor: AppColors.success, icon: Assets.icons.show),
-      _Type.warning => BackgroundedIcon(
-          backgroundColor: AppColors.accent, icon: Assets.icons.alert),
+      _Type.failure => Icon(
+          Icons.error_outline,
+          color: AppColors.error,
+          size: 48.r,
+        ),
+      _Type.success => Icon(
+          Icons.check_circle_outline,
+          color: AppColors.success,
+          size: 48.r,
+        ),
+      _Type.warning => Icon(
+          Icons.warning_amber_outlined,
+          color: AppColors.secondary,
+          size: 48.r,
+        ),
     };
   }
 }
@@ -338,7 +347,7 @@ class _OutlinedButton extends StatelessWidget {
         child: Text(
           text,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.background.withAlpha(100),
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontSize: 16.sp,
               ),
         ),

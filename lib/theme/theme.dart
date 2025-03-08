@@ -10,7 +10,7 @@ import '../constants/system_ui_overlay_styles.dart';
 import '../gen/assets.gen.dart';
 
 final theme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.brandColor),
+  colorScheme: _colorScheme,
   scaffoldBackgroundColor: AppColors.background,
   // outlinedButtonTheme: _outLinedButtonThemeData,
   filledButtonTheme: _filledButtomThemeData,
@@ -21,14 +21,13 @@ final theme = ThemeData(
   // bottomSheetTheme: _bottomSheetThemeData,
   primaryColorLight: AppColors.brandColor,
   textButtonTheme: _textButtonThemeData,
-  actionIconTheme: _actionIconThemeData,
   iconButtonTheme: _iconButtonThemeData,
   textSelectionTheme: TextSelectionThemeData(
     cursorColor: AppColors.white,
     selectionColor: AppColors.white.withAlpha(50),
     selectionHandleColor: AppColors.white,
   ),
-  // dialogTheme: _dialogTheme,
+  dialogTheme: _dialogTheme,
   primaryColor: AppColors.brandColor,
 
   primaryTextTheme: _textTheme,
@@ -40,7 +39,13 @@ final theme = ThemeData(
   textTheme: _textTheme,
 
   useMaterial3: true,
-  dialogTheme: DialogThemeData(backgroundColor: AppColors.white),
+);
+
+final _colorScheme = ColorScheme.dark(
+  primary: AppColors.brandColor,
+  onPrimary: AppColors.white,
+  onSecondary: AppColors.background,
+  secondary: AppColors.white,
 );
 
 final _filledButtomThemeData = FilledButtonThemeData(
@@ -111,7 +116,7 @@ final _inputDecorationTheme = InputDecorationTheme(
   iconColor: AppColors.white,
   suffixIconColor: AppColors.white,
   prefixIconColor: AppColors.white,
-  hintStyle: labelSmall.copyWith(color: AppColors.background.withAlpha(125)),
+  hintStyle: labelSmall.copyWith(color: AppColors.white.withAlpha(125)),
   labelStyle: labelSmall.copyWith(color: AppColors.background.withAlpha(125)),
   errorStyle: labelSmall.copyWith(color: AppColors.error),
   errorMaxLines: 2,
@@ -167,13 +172,6 @@ final _textButtonThemeData = TextButtonThemeData(
   ),
 );
 
-final _actionIconThemeData = ActionIconThemeData(
-  backButtonIconBuilder: (context) => IconButton(
-    onPressed: context.router.pop,
-    icon: Assets.icons.show.svg(),
-  ),
-);
-
 final _iconButtonThemeData = IconButtonThemeData(style: _iconButtonStyle);
 
 final _iconButtonStyle = ButtonStyle(
@@ -184,13 +182,13 @@ final _iconButtonStyle = ButtonStyle(
   shape: const WidgetStatePropertyAll(CircleBorder()),
 );
 
-// final _dialogTheme = DialogTheme(
-//   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
-//   contentTextStyle: bodyLargeMobile.copyWith(color: labelColor),
-//   titleTextStyle: titleSmallMobile,
-//   backgroundColor: backgroundColor,
-//   elevation: 0,
-// );
+final _dialogTheme = DialogTheme(
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+  contentTextStyle: displaySmall,
+  titleTextStyle: titleMedium,
+  backgroundColor: AppColors.background,
+  elevation: 0,
+);
 
 final _dividerThemeData = DividerThemeData(
   color: AppColors.background.withAlpha(25),
@@ -217,7 +215,7 @@ final _appBarTheme = AppBarTheme(
 
 final _iconThemeData = IconThemeData(
   color: AppColors.brandColor,
-  size: 100.r,
+  size: 72,
 );
 
 final _textTheme = TextTheme(

@@ -105,7 +105,7 @@ class PasswordTextField extends HookWidget {
       height: 18.h,
       fit: BoxFit.scaleDown,
       colorFilter: ColorFilter.mode(
-        AppColors.white,
+        Theme.of(context).colorScheme.onPrimary,
         BlendMode.srcIn,
       ),
     );
