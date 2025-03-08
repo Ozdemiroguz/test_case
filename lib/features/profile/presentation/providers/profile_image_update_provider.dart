@@ -34,11 +34,9 @@ class _ProfileImageNotifier
 
     result.fold(
       (failure) {
-        print("Failure: $failure");
         state = state.copyWith(failure: some(failure), isLoading: false);
       },
       (profileImageUrl) {
-        print("Profile Image Url: $profileImageUrl");
         state = state.copyWith(
           profileImageUrl: profileImageUrl,
           isLoading: false,

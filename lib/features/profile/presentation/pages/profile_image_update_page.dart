@@ -208,7 +208,6 @@ class _ContinueButton extends ConsumerWidget {
                   .updateProfileImage(state.profileImagePath!);
 
               if (!isSetupAccount) {
-                print('getProfile');
                 ref.watch(profileProvider.notifier).getProfile();
               }
             }

@@ -23,8 +23,6 @@ class _SignupNotifier extends AutoDisposeNotifier<SignupState> {
           name: state.name,
         );
 
-    print("result: $result");
-
     state = state.copyWith(failure: result, isLoading: false);
   }
 

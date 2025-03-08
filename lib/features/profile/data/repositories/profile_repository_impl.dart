@@ -1,17 +1,17 @@
 // Repository Uygulaması
 import 'dart:io';
-import 'dart:math';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:test_case/constants/api_endpoints.dart';
 import 'package:test_case/core/models/failure/failure.dart';
-import 'package:test_case/features/home/domain/models/movie.dart';
 import 'package:test_case/features/profile/domain/models/profile_model.dart';
 import 'package:test_case/features/profile/domain/repositories/profile_repository.dart';
 import 'package:test_case/services/network/network_service.dart';
+import 'package:path/path.dart' as path;
 
 @LazySingleton(as: ProfileRepository)
 class ProfileRepositoryImpl implements ProfileRepository {
@@ -41,15 +41,24 @@ class ProfileRepositoryImpl implements ProfileRepository {
   Future<Either<Failure, String>> uploadProfilePhoto(File file) async {
     File compressedFile;
 
-    // 1. Resmi sıkıştırma işlemi
     try {
-      compressedFile = await FlutterNativeImage.compressImage(
-        file.path,
-        quality:
-            80, // Kalite değeri (0-100); daha düşük boyut için düşünebilirsiniz.
-        targetWidth: 800, // İsteğe bağlı: hedef genişlik.
-        targetHeight: 800, // İsteğe bağlı: hedef yükseklik.
+      final dir = await getTemporaryDirectory();
+      final targetPath =
+          path.join(dir.path, 'compressed_${path.basename(file.path)}');
+
+      final result = await FlutterImageCompress.compressAndGetFile(
+        file.absolute.path,
+        targetPath,
+        quality: 80, // Kalite değeri (0-100)
+        minWidth: 800, // Hedef genişlik
+        minHeight: 800, // Hedef yükseklik
       );
+
+      if (result == null) {
+        return left(Failure.unknownError('Image compression failed'));
+      }
+
+      compressedFile = File(result.path);
     } catch (e) {
       return left(Failure.unknownError('Image compression failed: $e'));
     }

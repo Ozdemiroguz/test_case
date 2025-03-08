@@ -37,7 +37,6 @@ class CustomImageWidget extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         },
         errorBuilder: (context, error, stackTrace) {
-          print("Error loading image: $error");
           return LottieBuilder.asset(
             "assets/lottie/not_found.json",
             width: double.infinity,

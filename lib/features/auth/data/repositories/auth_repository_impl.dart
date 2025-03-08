@@ -99,7 +99,6 @@ final class AuthRepositoryImpl implements AuthRepository {
         "password": password,
       },
     );
-    print("result: $result");
     return await result.fold(
       (l) => some(Failure.auth(l.message)),
       (r) => optionOf(r.data).fold(

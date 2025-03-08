@@ -104,8 +104,6 @@ final class NetworkServiceImpl implements NetworkService {
       if (await networkInfo.isConnected) {
         final result = await operation();
 
-        print("Response services: ${result.data}");
-
         final code = result.data?['response']['code'];
 
         if (code == 401) {
@@ -135,7 +133,6 @@ final class NetworkServiceImpl implements NetworkService {
           Failure.connectionTimedOut(connectionTimedOutMessage),
         );
       } else {
-        print("Error: ${e.message}");
         final errorData = e.response?.data as Map<String, dynamic>?;
         final apiMessage = errorData?["response"]?["message"]?.toString();
         return left(
